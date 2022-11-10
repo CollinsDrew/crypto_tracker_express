@@ -46,11 +46,11 @@ const simulatorSchema = new mongoose.Schema({
 // Modal
 const simulatorModal = mongoose.model("Trade", simulatorSchema);
 
-app.get("/purchase", (req, res) => {
+app.get("/.netlify/functions/api/purchase", (req, res) => {
   res.send("hurray");
 });
 
-app.post("/purchase/create", async (req, res) => {
+app.post("/.netlify/functions/api/purchase/create", async (req, res) => {
   const newData = new simulatorModal({
     account: req.body.account,
     coin: req.body.coin,
@@ -69,7 +69,7 @@ app.post("/purchase/create", async (req, res) => {
   console.log(req.body);
 });
 
-app.get("/account", async (req, res) => {
+app.get("/.netlify/functions/api/account", async (req, res) => {
   const profile = req.query.account;
 
   const allData = await simulatorModal.find();
@@ -77,7 +77,7 @@ app.get("/account", async (req, res) => {
   res.send(allData.filter((item) => item.account === profile));
 });
 
-// app.patch("update/:account", async (req,res)=>{
+// app.patch("/.netlify/functions/api/update/:account", async (req,res)=>{
 //   const accountUpdate = req.params.account;
 //   const reqAccount = await simulatorModal.find(accountUpdate);
 //   reqAccount.amount = req.params.amount;
